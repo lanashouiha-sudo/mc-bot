@@ -2,14 +2,14 @@ const mineflayer = require('mineflayer');
 const express = require('express');
 
 const app = express();
-app.get('/', (req, res) => res.send('Bot is Online'));
+app.get('/', (req, res) => res.send('Online'));
 app.listen(process.env.PORT || 3000);
 
 const botOptions = {
     host: 'VITOOSOLO.aternos.me', 
     port: 51185,                  
     username: 'PvP_Trainer',       
-    version: '1.20.1' 
+    version: '1.21.11' 
 };
 
 let bot;
@@ -18,7 +18,6 @@ function createBot() {
     bot = mineflayer.createBot(botOptions);
 
     bot.on('spawn', () => {
-        console.log('Bot spawned in the server');
         equipShield();
     });
 
@@ -33,11 +32,10 @@ function createBot() {
     });
 
     bot.on('end', () => {
-        console.log('Connection lost. Reconnecting in 15 seconds...');
         setTimeout(createBot, 15000);
     });
 
-    bot.on('error', (err) => console.log('Error: ', err));
+    bot.on('error', (err) => console.log(err));
 }
 
 function equipShield() {
