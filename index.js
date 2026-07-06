@@ -26,8 +26,10 @@ function createBot() {
     });
 
     bot.on('physicsTick', () => {
-        if (!bot.isUsingItem()) {
-            bot.activateItem(); 
+        if (bot.util && typeof bot.util.isUsingItem === 'function') {
+            if (!bot.util.isUsingItem()) bot.activateItem();
+        } else {
+            bot.activateItem();
         }
     });
 
